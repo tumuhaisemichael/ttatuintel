@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --primary: #1A6BFF;
+    --primary-dark: #0047CC;
+    --primary-light: #4D8FFF;
+    --secondary: #7B2FFF;
+    --secondary-dark: #5500CC;
+    --secondary-light: #A56FFF;
+    --accent: #00D4FF;
+    --white: #FFFFFF;
+    --off-white: #F0F4FF;
+    --dark: #050A1A;
+    --dark-surface: #0D1426;
+    --text-muted: #8A9ABB;
+  }
+
+  body {
+    @apply bg-dark text-white font-dm antialiased;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-syne tracking-tight;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-accent;
+  }
+
+  .text-gradient-hero {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-light via-white to-secondary-light;
+  }
+
+  .bg-glass {
+    @apply bg-white/5 backdrop-blur-md border border-white/10;
+  }
+
+  .bg-glass-dark {
+    @apply bg-dark-surface/80 backdrop-blur-lg border border-white/5;
+  }
+  
+  .clip-diagonal {
+    clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
+  }
+
+  .clip-diagonal-reverse {
+    clip-path: polygon(0 0, 100% 5%, 100% 100%, 0 100%);
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--dark);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--primary-dark);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
