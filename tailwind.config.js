@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: 'class',
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -16,9 +17,10 @@ module.exports = {
         'secondary-light': '#A56FFF',
         accent: '#00D4FF',
         'off-white': '#F0F4FF',
-        dark: '#050A1A',
-        'dark-surface': '#0D1426',
-        'text-muted': '#8A9ABB',
+        // These map to the CSS variables so they flip with theme
+        dark: 'rgb(var(--bg) / <alpha-value>)',
+        'dark-surface': 'rgb(var(--bg-surface) / <alpha-value>)',
+        'text-muted': 'rgb(var(--text-muted) / <alpha-value>)',
       },
       fontFamily: {
         syne: ['var(--font-syne)', 'sans-serif'],

@@ -3,24 +3,38 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
-    --primary: #1A6BFF;
-    --primary-dark: #0047CC;
-    --primary-light: #4D8FFF;
-    --secondary: #7B2FFF;
-    --secondary-dark: #5500CC;
-    --secondary-light: #A56FFF;
-    --accent: #00D4FF;
-    --white: #FFFFFF;
-    --off-white: #F0F4FF;
-    --dark: #050A1A;
-    --dark-surface: #0D1426;
-    --text-muted: #8A9ABB;
+  /* ── Dark mode (default) ── */
+  :root,
+  .dark {
+    --bg:             5 10 26;
+    --bg-surface:     13 20 38;
+    --text:           255 255 255;
+    --text-muted:     138 154 187;
+    --border:         255 255 255;
+    --scrollbar-bg:   5 10 26;
+    --scrollbar-thumb:0 71 204;
   }
 
+  /* ── Light mode ── */
+  .light {
+    --bg:             232 237 255;   /* warm periwinkle #E8EDFF */
+    --bg-surface:     218 226 255;   /* slightly deeper #DAE2FF */
+    --text:           10 14 60;      /* deep navy #0A0E3C */
+    --text-muted:     72 85 140;     /* slate-navy */
+    --border:         10 14 60;
+    --scrollbar-bg:   210 220 255;
+    --scrollbar-thumb:26 107 255;
+  }
+
+  html { color-scheme: dark; }
+  html.light { color-scheme: light; }
+
   body {
-    @apply bg-dark text-white font-dm antialiased;
+    background-color: rgb(var(--bg));
+    color: rgb(var(--text));
+    @apply font-dm antialiased;
     overflow-x: hidden;
+    transition: background-color 0.4s ease, color 0.4s ease;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -28,6 +42,92 @@
   }
 }
 
+/* ─────────────────────────────────────────────────────────
+   LIGHT MODE — global overrides for hardcoded dark classes
+   ───────────────────────────────────────────────────────── */
+.light {
+  /* White text → deep navy */
+  .text-white {
+    color: rgb(10 14 60) !important;
+  }
+
+  /* Muted text */
+  .text-text-muted {
+    color: rgb(72 85 140) !important;
+  }
+
+  /* Backgrounds */
+  .bg-dark {
+    background-color: rgb(232 237 255) !important;
+  }
+  .bg-dark-surface,
+  .bg-dark-surface\/80,
+  .bg-dark-surface\/50,
+  .bg-dark-surface\/90 {
+    background-color: rgb(218 226 255) !important;
+  }
+
+  /* Glassmorphism — use dark glass in light mode for contrast */
+  .bg-glass {
+    background-color: rgba(10 14 60 / 0.06) !important;
+    border-color: rgba(10 14 60 / 0.12) !important;
+  }
+  .bg-glass-dark {
+    background-color: rgba(218 226 255 / 0.90) !important;
+    border-color: rgba(10 14 60 / 0.10) !important;
+  }
+
+  /* White tinted backgrounds */
+  .bg-white\/5  { background-color: rgba(10 14 60 / 0.05) !important; }
+  .bg-white\/10 { background-color: rgba(10 14 60 / 0.08) !important; }
+  .bg-white\/15 { background-color: rgba(10 14 60 / 0.12) !important; }
+
+  /* Borders */
+  .border-white\/10 { border-color: rgba(10 14 60 / 0.12) !important; }
+  .border-white\/5  { border-color: rgba(10 14 60 / 0.08) !important; }
+  .border-white\/20 { border-color: rgba(10 14 60 / 0.18) !important; }
+
+  /* Hero gradient radial glow */
+  .bg-primary\/10  { background-color: rgba(26 107 255 / 0.12) !important; }
+  .bg-primary\/5   { background-color: rgba(26 107 255 / 0.08) !important; }
+
+  /* Absolute positioned gradient overlays (dark-surface fades) */
+  .from-dark-surface { --tw-gradient-from: rgb(232 237 255) !important; }
+  .to-dark-surface   { --tw-gradient-to:   rgb(232 237 255) !important; }
+
+  /* Navbar scrolled state */
+  header.backdrop-blur-md {
+    background-color: rgba(218 226 255 / 0.85) !important;
+  }
+
+  /* Mobile menu */
+  .bg-dark-surface {
+    background-color: rgb(218 226 255) !important;
+  }
+
+  /* Form inputs */
+  input, textarea, select {
+    color: rgb(10 14 60) !important;
+    background-color: rgba(218 226 255 / 0.6) !important;
+    border-color: rgba(10 14 60 / 0.15) !important;
+  }
+  input::placeholder, textarea::placeholder {
+    color: rgba(10 14 60 / 0.35) !important;
+  }
+  select option {
+    background-color: rgb(218 226 255);
+    color: rgb(10 14 60);
+  }
+
+  /* text-gradient-hero (white in dark mode) */
+  .text-gradient-hero {
+    background-image: linear-gradient(to right, #1A6BFF, #0A0E3C, #7B2FFF) !important;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────
+   Shared utility classes
+   ───────────────────────────────────────────────────────── */
 @layer utilities {
   .text-gradient {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-accent;
@@ -38,13 +138,17 @@
   }
 
   .bg-glass {
-    @apply bg-white/5 backdrop-blur-md border border-white/10;
+    background-color: rgba(255 255 255 / 0.05);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255 255 255 / 0.10);
   }
 
   .bg-glass-dark {
-    @apply bg-dark-surface/80 backdrop-blur-lg border border-white/5;
+    background-color: rgba(13 20 38 / 0.80);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255 255 255 / 0.05);
   }
-  
+
   .clip-diagonal {
     clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
   }
@@ -55,16 +159,10 @@
 }
 
 /* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-track {
-  background: var(--dark);
-}
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: rgb(var(--scrollbar-bg)); }
 ::-webkit-scrollbar-thumb {
-  background: var(--primary-dark);
+  background: rgb(var(--scrollbar-thumb));
   border-radius: 4px;
 }
-::-webkit-scrollbar-thumb:hover {
-  background: var(--primary);
-}
+::-webkit-scrollbar-thumb:hover { background: #1A6BFF; }

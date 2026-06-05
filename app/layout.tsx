@@ -3,6 +3,7 @@ import { Syne, DM_Sans } from 'next/font/google'
 import './globals.css'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import ThemeProvider from '@/components/ThemeProvider'
 
 const syne = Syne({ 
   subsets: ['latin'],
@@ -27,13 +28,15 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${syne.variable} ${dmSans.variable}`}>
-      <body className="font-dm bg-dark text-white antialiased overflow-x-hidden">
-        <Navbar />
-        <main className="min-h-screen">
-          {children}
-        </main>
-        <Footer />
+    <html lang="en" className={`${syne.variable} ${dmSans.variable}`} suppressHydrationWarning>
+      <body className="font-dm antialiased overflow-x-hidden">
+        <ThemeProvider>
+          <Navbar />
+          <main className="min-h-screen">
+            {children}
+          </main>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   )

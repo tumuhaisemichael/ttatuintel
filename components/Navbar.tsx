@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { Menu, X } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import GradientButton from './ui/GradientButton'
+import ThemeToggle from './ThemeToggle'
 
 const navLinks = [
   { name: 'Services', href: '/services' },
@@ -29,7 +30,7 @@ export default function Navbar() {
     <header
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-dark-surface/80 backdrop-blur-md border-b border-white/10 py-4 shadow-lg'
+          ? 'bg-dark-surface/80 backdrop-blur-md border-b border-black/10 dark:border-white/10 py-4 shadow-lg'
           : 'bg-transparent py-6'
       }`}
     >
@@ -46,7 +47,7 @@ export default function Navbar() {
             <Link
               key={link.name}
               href={link.href}
-              className="text-text-muted hover:text-white transition-colors text-sm font-medium relative group"
+              className="text-text-muted hover:text-black dark:hover:text-white transition-colors text-sm font-medium relative group"
             >
               {link.name}
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-accent transition-all duration-300 group-hover:w-full"></span>
@@ -54,17 +55,22 @@ export default function Navbar() {
           ))}
         </nav>
 
-        <div className="hidden md:block">
+        <div className="hidden md:flex items-center gap-3">
+          <ThemeToggle />
           <GradientButton href="/contact">Get Started</GradientButton>
         </div>
 
         {/* Mobile Toggle */}
-        <button
-          className="md:hidden text-white z-50"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        >
-          {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
-        </button>
+        <div className="flex md:hidden items-center gap-2 z-50">
+          <ThemeToggle />
+          <button
+            aria-label="Toggle menu"
+            className="text-black dark:text-white"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu */}
