@@ -23,8 +23,8 @@ module.exports = {
         'text-muted': 'rgb(var(--text-muted) / <alpha-value>)',
       },
       fontFamily: {
-        syne: ['var(--font-syne)', 'sans-serif'],
-        dm: ['var(--font-dm)', 'sans-serif'],
+        syne: ['Inter', 'Segoe UI', 'Helvetica Neue', 'Arial', 'sans-serif'],
+        dm: ['Inter', 'Segoe UI', 'Helvetica Neue', 'Arial', 'sans-serif'],
       },
       backgroundImage: {
         'gradient-primary': 'linear-gradient(135deg, #1A6BFF, #7B2FFF, #5500CC)',

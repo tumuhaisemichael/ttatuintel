@@ -17,12 +17,12 @@
 
   /* ── Light mode ── */
   .light {
-    --bg:             232 237 255;   /* warm periwinkle #E8EDFF */
-    --bg-surface:     218 226 255;   /* slightly deeper #DAE2FF */
-    --text:           10 14 60;      /* deep navy #0A0E3C */
-    --text-muted:     72 85 140;     /* slate-navy */
-    --border:         10 14 60;
-    --scrollbar-bg:   210 220 255;
+    --bg:             247 249 252;
+    --bg-surface:     255 255 255;
+    --text:           15 23 42;
+    --text-muted:     71 85 105;
+    --border:         148 163 184;
+    --scrollbar-bg:   232 238 247;
     --scrollbar-thumb:26 107 255;
   }
 
@@ -34,6 +34,7 @@
     color: rgb(var(--text));
     @apply font-dm antialiased;
     overflow-x: hidden;
+    scroll-behavior: smooth;
     transition: background-color 0.4s ease, color 0.4s ease;
   }
 
@@ -46,82 +47,131 @@
    LIGHT MODE — global overrides for hardcoded dark classes
    ───────────────────────────────────────────────────────── */
 .light {
-  /* White text → deep navy */
+  /* White text → deep slate */
   .text-white {
-    color: rgb(10 14 60) !important;
+    color: rgb(15 23 42) !important;
+  }
+  .text-white\/90 {
+    color: rgb(30 41 59 / 0.9) !important;
+  }
+  .text-white\/80 {
+    color: rgb(51 65 85 / 0.8) !important;
+  }
+  .text-white\/60,
+  .text-white\/50,
+  .text-white\/40,
+  .text-white\/35,
+  .text-white\/30,
+  .text-white\/20 {
+    color: rgb(71 85 105) !important;
   }
 
   /* Muted text */
   .text-text-muted {
-    color: rgb(72 85 140) !important;
+    color: rgb(71 85 105) !important;
+  }
+
+  body {
+    background-image:
+      radial-gradient(circle at top left, rgba(26, 107, 255, 0.08), transparent 28%),
+      radial-gradient(circle at top right, rgba(123, 47, 255, 0.06), transparent 24%),
+      linear-gradient(180deg, rgba(255,255,255,0.92), rgba(247,249,252,1));
   }
 
   /* Backgrounds */
   .bg-dark {
-    background-color: rgb(232 237 255) !important;
+    background-color: rgb(247 249 252) !important;
   }
   .bg-dark-surface,
   .bg-dark-surface\/80,
   .bg-dark-surface\/50,
   .bg-dark-surface\/90 {
-    background-color: rgb(218 226 255) !important;
+    background-color: rgba(255 255 255 / 0.88) !important;
   }
 
-  /* Glassmorphism — use dark glass in light mode for contrast */
+  /* Glassmorphism */
   .bg-glass {
-    background-color: rgba(10 14 60 / 0.06) !important;
-    border-color: rgba(10 14 60 / 0.12) !important;
+    background-color: rgba(255 255 255 / 0.72) !important;
+    border-color: rgba(148 163 184 / 0.22) !important;
+    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.08) !important;
   }
   .bg-glass-dark {
-    background-color: rgba(218 226 255 / 0.90) !important;
-    border-color: rgba(10 14 60 / 0.10) !important;
+    background-color: rgba(255 255 255 / 0.9) !important;
+    border-color: rgba(148 163 184 / 0.22) !important;
+    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.1) !important;
   }
 
   /* White tinted backgrounds */
-  .bg-white\/5  { background-color: rgba(10 14 60 / 0.05) !important; }
-  .bg-white\/10 { background-color: rgba(10 14 60 / 0.08) !important; }
-  .bg-white\/15 { background-color: rgba(10 14 60 / 0.12) !important; }
+  .bg-white\/3  { background-color: rgba(255 255 255 / 0.55) !important; }
+  .bg-white\/5  { background-color: rgba(255 255 255 / 0.64) !important; }
+  .bg-white\/10 { background-color: rgba(241 245 249 / 0.88) !important; }
+  .bg-white\/15 { background-color: rgba(226 232 240 / 0.95) !important; }
+
+  .bg-black\/40,
+  .bg-black\/50 {
+    background-color: rgba(226 232 240 / 0.92) !important;
+  }
 
   /* Borders */
-  .border-white\/10 { border-color: rgba(10 14 60 / 0.12) !important; }
-  .border-white\/5  { border-color: rgba(10 14 60 / 0.08) !important; }
-  .border-white\/20 { border-color: rgba(10 14 60 / 0.18) !important; }
+  .border-white\/10 { border-color: rgba(148 163 184 / 0.22) !important; }
+  .border-white\/5  { border-color: rgba(148 163 184 / 0.16) !important; }
+  .border-white\/20 { border-color: rgba(148 163 184 / 0.28) !important; }
 
   /* Hero gradient radial glow */
-  .bg-primary\/10  { background-color: rgba(26 107 255 / 0.12) !important; }
-  .bg-primary\/5   { background-color: rgba(26 107 255 / 0.08) !important; }
+  .bg-primary\/10  { background-color: rgba(26 107 255 / 0.10) !important; }
+  .bg-primary\/5   { background-color: rgba(26 107 255 / 0.06) !important; }
 
   /* Absolute positioned gradient overlays (dark-surface fades) */
-  .from-dark-surface { --tw-gradient-from: rgb(232 237 255) !important; }
-  .to-dark-surface   { --tw-gradient-to:   rgb(232 237 255) !important; }
+  .from-dark-surface { --tw-gradient-from: rgb(255 255 255) !important; }
+  .to-dark-surface   { --tw-gradient-to:   rgb(247 249 252) !important; }
 
   /* Navbar scrolled state */
   header.backdrop-blur-md {
-    background-color: rgba(218 226 255 / 0.85) !important;
+    background-color: rgba(255 255 255 / 0.82) !important;
+    border-color: rgba(148 163 184 / 0.2) !important;
+    box-shadow: 0 12px 40px rgba(15, 23, 42, 0.06) !important;
   }
 
   /* Mobile menu */
   .bg-dark-surface {
-    background-color: rgb(218 226 255) !important;
+    background-color: rgba(255 255 255 / 0.96) !important;
   }
 
   /* Form inputs */
   input, textarea, select {
-    color: rgb(10 14 60) !important;
-    background-color: rgba(218 226 255 / 0.6) !important;
-    border-color: rgba(10 14 60 / 0.15) !important;
+    color: rgb(15 23 42) !important;
+    background-color: rgba(255 255 255 / 0.9) !important;
+    border-color: rgba(148 163 184 / 0.26) !important;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04) !important;
   }
   input::placeholder, textarea::placeholder {
-    color: rgba(10 14 60 / 0.35) !important;
+    color: rgba(71 85 105 / 0.45) !important;
   }
   select option {
-    background-color: rgb(218 226 255);
-    color: rgb(10 14 60);
+    background-color: rgb(255 255 255);
+    color: rgb(15 23 42);
   }
 
   /* text-gradient-hero (white in dark mode) */
   .text-gradient-hero {
-    background-image: linear-gradient(to right, #1A6BFF, #0A0E3C, #7B2FFF) !important;
+    background-image: linear-gradient(to right, #1A6BFF, #0F172A, #7B2FFF) !important;
+  }
+
+  .bg-hero-mesh {
+    background-image:
+      linear-gradient(rgba(15,23,42,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(15,23,42,0.04) 1px, transparent 1px);
+  }
+
+  .shadow-2xl,
+  .shadow-lg {
+    box-shadow: 0 18px 50px rgba(15, 23, 42, 0.08) !important;
+  }
+
+  [class*="bg-gradient-to"] .text-white,
+  [class*="bg-gradient-to"] .text-white\/90,
+  [class*="bg-gradient-to"] .text-white\/80 {
+    color: rgb(255 255 255) !important;
   }
 }
 
@@ -149,12 +199,28 @@
     border: 1px solid rgba(255 255 255 / 0.05);
   }
 
+  .bg-hero-mesh {
+    background-image:
+      linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 42px 42px;
+    mask-image: radial-gradient(circle at center, black 35%, transparent 90%);
+  }
+
   .clip-diagonal {
     clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
   }
 
   .clip-diagonal-reverse {
     clip-path: polygon(0 0, 100% 5%, 100% 100%, 0 100%);
+  }
+
+  .mask-horizontal {
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  }
+
+  .pause {
+    animation-play-state: paused;
   }
 }
 

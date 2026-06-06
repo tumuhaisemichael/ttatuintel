@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 
@@ -19,6 +19,8 @@ export default function GradientButton({
   className = '',
   type = 'button',
 }: GradientButtonProps) {
+  const [offset, setOffset] = useState({ x: 0, y: 0 })
+
   const baseClasses = `relative inline-flex items-center justify-center px-8 py-3 font-medium text-white transition-all duration-300 rounded-full group overflow-hidden ${className}`
   
   const content = (
@@ -31,16 +33,43 @@ export default function GradientButton({
     </>
   )
 
+  const handlePointerMove = (event: React.MouseEvent<HTMLElement>) => {
+    const rect = event.currentTarget.getBoundingClientRect()
+    const x = event.clientX - rect.left - rect.width / 2
+    const y = event.clientY - rect.top - rect.height / 2
+
+    setOffset({
+      x: x * 0.14,
+      y: y * 0.18,
+    })
+  }
+
+  const handlePointerLeave = () => {
+    setOffset({ x: 0, y: 0 })
+  }
+
   if (href) {
     return (
-      <Link href={href} className={baseClasses}>
-        {content}
-      </Link>
+      <motion.div
+        animate={{ x: offset.x, y: offset.y }}
+        transition={{ type: 'spring', stiffness: 240, damping: 18, mass: 0.7 }}
+        onMouseMove={handlePointerMove}
+        onMouseLeave={handlePointerLeave}
+        className="inline-flex"
+      >
+        <Link href={href} className={baseClasses}>
+          {content}
+        </Link>
+      </motion.div>
     )
   }
 
   return (
     <motion.button
+      animate={{ x: offset.x, y: offset.y }}
+      transition={{ type: 'spring', stiffness: 240, damping: 18, mass: 0.7 }}
+      onMouseMove={handlePointerMove}
+      onMouseLeave={handlePointerLeave}
       whileTap={{ scale: 0.95 }}
       type={type}
       onClick={onClick}

@@ -1,21 +1,8 @@
 import type { Metadata } from 'next'
-import { Syne, DM_Sans } from 'next/font/google'
 import './globals.css'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import ThemeProvider from '@/components/ThemeProvider'
-
-const syne = Syne({ 
-  subsets: ['latin'],
-  variable: '--font-syne',
-  display: 'swap',
-})
-
-const dmSans = DM_Sans({ 
-  subsets: ['latin'],
-  variable: '--font-dm',
-  display: 'swap',
-})
 
 export const metadata: Metadata = {
   title: 'TTatuIntel | Building the Digital Future',
@@ -28,7 +15,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${syne.variable} ${dmSans.variable}`} suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <body className="font-dm antialiased overflow-x-hidden">
         <ThemeProvider>
           <Navbar />

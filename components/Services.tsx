@@ -83,15 +83,13 @@ export default function Services() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="flex flex-wrap justify-center gap-6"
         >
           {services.map((service, index) => (
             <motion.div
               key={service.title}
               variants={itemVariants}
-              className={`bg-glass p-8 rounded-2xl hover:scale-[1.03] hover:shadow-[0_0_30px_rgba(26,107,255,0.2)] transition-all duration-300 border-white/5 relative group ${
-                index === 3 ? 'md:col-span-1 lg:col-start-2' : ''
-              } ${index === 4 ? 'md:col-span-2 lg:col-span-1' : ''}`}
+              className="bg-glass p-8 rounded-2xl hover:scale-[1.03] hover:shadow-[0_0_30px_rgba(26,107,255,0.2)] transition-all duration-300 border-white/5 relative group w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]"
             >
               <div className={`w-16 h-16 rounded-xl mb-6 flex items-center justify-center bg-gradient-to-br ${service.color} bg-opacity-10 backdrop-blur-sm shadow-inner group-hover:shadow-[0_0_20px_rgba(255,255,255,0.2)] transition-shadow`}>
                 <div className="text-white drop-shadow-md">
